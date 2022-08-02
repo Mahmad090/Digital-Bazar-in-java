@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Project01</title>
+        <script>
+            class link{
+                constructor(title,url,author)
+                {
+                    let absoloute=url;
+                    if(!absoloute.startsWith("http://")&&!absoloute.startsWith("https://"))
+                    {
+                        absoloute=`http://${url}`;
+                    }
+                    this.author=author;
+                    this.title=title;
+                    this.url=absoloute;
+                }
+                getdata()
+                {
+                    return `${this.title} (${this.url}) ${this.author}`;
+                }
+            }
+            const links=[];
+            links.push(new link("Hacker News", "https://news.ycombinator.com", "Baptiste"));
+            links.push(new link("Reddit", "https://reddit.com", "Thomas"));
+            links.push(new link("Boing Boing", "boingboing.net", "Daniel"));
+            let choice;
+            while (choice !== "0") {
+            let choices = "\n1 : Show links";
+            choices += "\n2 : Add a link";
+            choices += "\n3 : Remove a link";
+            choices += "\n0 : Quit";
+            choice = prompt(`Choose an option: ${choices}`);
+
+            switch (choice) {
+                case "1": {
+                if (links.length > 0) {
+                    for (let i = 0; i < links.length; i++) {
+                    alert(`${i + 1}: ${links[i].getdata()}`);
+                    }
+                } else {
+                    alert("No links to display!");
+                }
+                break;
+                }
+                case "2": {
+                // Input link properties
+                const title = prompt("Enter the link title:");
+                const url = prompt("Enter the link url:");
+                const author = prompt("Enter the link author:");
+                // Add new link to array
+                links.push(new link(title, url, author));
+                break;
+                }
+                case "3": {
+                if (links.length > 0) {
+                    // Input link index (must be between 1 and the number of links)
+                    let index = -1;
+                    const maxIndex = links.length;
+                    while (index < 1 || index > links.length) {
+                    index = Number(
+                        prompt(`Enter the index of the link to be removed (between 1 and ${maxIndex}):`)
+                    );
+                    }
+                    // Remove selected link from array
+                    links.splice(index - 1, 1);
+                } else {
+                    alert("No links to remove!");
+                }
+                break;
+                }
+            }
+            }
+            alert("See you later!");
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>
